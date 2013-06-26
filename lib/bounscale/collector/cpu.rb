@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class Bounscale::Collector::Cpu < Bounscale::Collector::Base
   def pre
     @pre_user_time = Process.times.utime

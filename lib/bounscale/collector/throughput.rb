@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class Bounscale::Collector::Throughput < Bounscale::Collector::Busyness
   def pre
   end

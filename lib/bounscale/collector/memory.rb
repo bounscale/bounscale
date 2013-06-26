@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class Bounscale::Collector::Memory < Bounscale::Collector::Base
   def pre
   end

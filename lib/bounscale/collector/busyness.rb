@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 class Bounscale::Collector::Busyness < Bounscale::Collector::Base
   HISTORY_HOLDING_SEC = 10
   

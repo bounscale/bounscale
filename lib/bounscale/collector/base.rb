@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 module Bounscale
   module Collector
     class Base
