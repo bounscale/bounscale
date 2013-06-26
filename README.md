@@ -12,7 +12,7 @@ Bounscaleはgemのbounscaleにより、RackMiddlewareからアプリケーショ
 ## サポート環境
 __Application__
 
- * Rails2.0以降(RackMiddlewareが入っているもの)
+ * Rails2.0以降(Rack対応しているもの)
 
 __Heroku Stack__
 
