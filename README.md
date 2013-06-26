@@ -1,29 +1,78 @@
 # Bounscale
+Bounscaleは、HerokuへデプロイされたRailsアプリケーションをオートスケールする環境を提供するアドオンです。
 
-TODO: Write a gem description
+Bounscaleを追加することによって次のような利点を得ることができます。
 
-## Installation
+1. レスポンスの低下を抑えます。
 
-Add this line to your application's Gemfile:
+2. アプリケーションへの負荷に合わせて最適なDyno数の調整を行うことによりコストをより抑えることができます。
 
-    gem 'bounscale'
+Bounscaleはgemのbounscaleにより、RackMiddlewareからアプリケーションの状態を取得してオートスケールを実現しています。
 
-And then execute:
+## サポート環境
+__Application__
 
-    $ bundle
+ * Rails2.0以降(RackMiddlewareが入っているもの)
 
-Or install it yourself as:
+__Heroku Stack__
 
-    $ gem install bounscale
+ * Ceder Stack
 
-## Usage
+## はじめに
 
-TODO: Write usage instructions here
+ プロジェクトのGemfileに以下を追加します。
 
-## Contributing
+```Gemfile
+gem 'bounscale'
+```
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+## アドオンのインストール
+
+ アドオンを追加するために以下のコマンドを入力します。
+
+```
+ $ heroku addons:add bounscale
+```
+
+## Bounscale初期設定
+
+ Herokuのアプリ画面へ移動し、AddonsにBounscaleが追加されていることを確認します。
+
+ 確認を行った後に、Bounscaleアドオンをクリックします。
+
+ ![sample01](https://s3.amazonaws.com/bounscale/sample01.png)
+
+ Bounscaleボタンをクリック後、以下のような画面が表示されます。
+ 次に、3つの入力を行なってください。
+
+ 1. API Key
+
+ HerokuアカウントのAPIキーを入力してください。
+
+ APIキーの取得については、heroku dashbord画面でアカウント設定を選択します。
+ APIKeyの欄でShow API Keyボタンを押します。
+ Herokuアカウントのパスワードを求められるので、パスワードを入力するとAPIキーを取得することができます。
+
+ 2. Web URL
+
+ アプリの監視するURLを入力してください。
+
+ 3. Time Zone
+
+ 現在地のタイムゾーンを選択してください。
+
+入力後、Saveボタンを押してください。
+
+ ![sample02](https://s3.amazonaws.com/bounscale/sample02.png)
+
+BounscaleのTop画面が表示されれば完了となります。
+
+ ![sample03](https://s3.amazonaws.com/bounscale/sample03.png)
+
+## サポート
+
+ もし、バグなどを発見された場合、issuesまでご連絡をお願い致します。
+ 
+ それではあなたのアプリケーションがストレスから開放されることを。
+
+ DTS Corporation.
