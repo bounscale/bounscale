@@ -79,7 +79,9 @@ _Dyno limit_ではオートスケールにより変更されるDyno数の範囲�
 
  ![sample05](https://s3.amazonaws.com/bounscale/sample05.png)
 
-_Response Time_は、オートスケールする上でメインの指標値となっています。*Response Time*をクリックすると、レスポンスタイムを監視しているURLの設定を行うことができます。初期値がInitConfigのWebURLで設定した値となっています。
+_Response Time_は、オートスケールする上でメインの指標値となっています。
+
+*Response Time*をクリックすると、レスポンスタイムを監視しているURLの設定を行うことができます。初期値がInitConfigのWebURLで設定した値となっています。
 今回はそのままのURLです。変更する場合はテキストボックスにURLを入力します。
 
  ![sample06](https://s3.amazonaws.com/bounscale/sample06.png)
