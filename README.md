@@ -30,6 +30,13 @@ __Heroku Stack__
 gem 'bounscale'
 ```
 
+ Rails2の場合はconfig/environment.rbに以下を追加します。
+ (Rails3の場合は不要)
+
+```config/environment.rb
+config.gem 'bounscale'
+```
+
 ## アドオンのインストール
 
  アドオンを追加するために以下のコマンドを入力します。
