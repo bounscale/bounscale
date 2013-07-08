@@ -27,7 +27,9 @@ __Heroku Stack__
  プロジェクトのGemfileに以下を追加します。
 
 ```Gemfile
-gem 'bounscale'
+config.after_initialize do
+  require 'bounscale'
+end
 ```
 
  Rails2の場合はconfig/environment.rbに以下を追加します。
