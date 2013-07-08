@@ -1,20 +1,20 @@
 # Bounscale
-Bounscaleは、HerokuへデプロイされたRailsアプリケーションをオートスケールする環境を提供するアドオンです。
+Bounscale is an add-on that provides an environment to auto-scale the application Rails that is deployed to Heroku.
 
-Bounscaleを追加することによって次のような利点を得ることができます。
+You can gain the following advantages by adding Bounscale:
 
-1. レスポンスの低下を抑えます。
+1. You can prevent responses from decreasing.
 
-2. アプリケーションへの負荷に合わせて最適なDyno数の調整を行うことによりコストを抑えることができます。
+2. You can reduce costs by adjusting the optimal number of Dynos according to the load on the application.
 
-Bounscaleはgemのbounscaleにより、RackMiddlewareからアプリケーションの状態を取得してオートスケールを実現しています。
+Bounscale realizes auto-scaling by obtaining the status of the application from RackMiddleware using gem’s bounscale.
 
-## サポート環境
+## Supported Environments
 __Application__
 
- * 動作確認済
+ * Compatibility confirmed.
    * Rails 2.3 or 3.0 or 3.2
- * 仕組み上はRackに対応していれば利用可能です
+ * Supposed to be supported if compatible with the rack, according to the configurations.
 
 __Heroku Stack__
 
@@ -22,141 +22,140 @@ __Heroku Stack__
 
  Ruby 1.9.2 or 1.9.3
 
-## はじめに
+## Getting Started
 
- プロジェクトのGemfileに以下を追加します。
+ Add the following to your project’s Gemfile:
 
 ```Gemfile
 gem 'bounscale'
 ```
 
- Rails2の場合はconfig/environment.rbに以下を追加します。
- (Rails3の場合は不要)
+ On Rails2 (not Rails3), add the following to your config/environment.rb:
 
 ```config/environment.rb
-config.gem 'bounscale'
+config.after_initialize do
+  require 'bounscale'
+end
 ```
 
-## アドオンのインストール
+## Installation of the Add-on
 
- アドオンを追加するために以下のコマンドを入力します。
+ Type the following command to add the add-on:
 
 ```
  $ heroku addons:add bounscale
 ```
 
-## Bounscale初期設定
+## Bounscale Default Settings
 
- Herokuのアプリケーション画面へ移動し、AddonsにBounscaleが追加されていることを確認します。
+ Go to Heroku’s Application screen and check that Bounscale has been added to Addons.
 
- 確認を行った後に、Bounscaleアドオンをクリックします。
+ Click the Bounscale add-on after confirming that Bounscale is added to Addons.
 
  ![sample01](https://s3.amazonaws.com/bounscale/sample01.png)
 
- Bounscaleボタンをクリック後、以下のような画面が表示されます。
- 次に、3つの入力を行なってください。
+ The following screen will appear after you click the Bounscale button. Then, enter the following three:
 
  1. API Key
 
- HerokuアカウントのAPIキーを入力してください。
+ Enter your Heroku account’s API key.
 
- APIキーの取得については、heroku dashboard画面で
- `Account > API Key > Show API Keyボタン`
- を押すことで入手できます。
+ You can obtain an API key by going to
+ `Heroku’s Dashboard > Account > API Key`
+ and clicking the Show API Key button.
 
  2. Web URL
 
- アプリケーションの監視するURLを入力してください。
+ Enter a URL you wish the application to monitor.
 
  3. Time Zone
 
- 現在地のタイムゾーンを選択してください。
+ Select the time zone of your location.
 
-入力後、Saveボタンを押してください。
+Click the Save button after selecting the time zone.
 
  ![sample02](https://s3.amazonaws.com/bounscale/sample02.png)
 
-BounscaleのTop画面が表示されれば完了となります。
+If Bounscale’s homepage is displayed, the setting is complete.
 
-設定完了後の初期状態はデータがないため、グラフが表示されません。
-5～10分程度待つとアプリケーションのデータを取得してグラフが表示され始めます。
+No charts are displayed immediately after the setting is complete as there is no data by default. Bounscale will obtain application data and start displaying charts after around 5-10 minutes.
 
  ![sample03](https://s3.amazonaws.com/bounscale/sample03.png)
 
-## オートスケール設定
+## Auto Scale Settings
 
- オートスケール設定画面は、オートスケールに関する各種設定値を指定することで、適切にオートスケールが行われるように制御する画面です。
+ The Auto Scale Settings screen is a screen that controls so that auto-scaling is performed appropriately according to the auto scaling-related settings you made.
 
  ![sample04](https://s3.amazonaws.com/bounscale/sample04.png)
 
 ### (a)Auto Scale
-  _Auto Scale_ではオートスケールのオンオフを設定することができます。有効(enable)の場合、グラフのデータを取得し、高負荷の条件を満たすとオートスケールが実施されます。無効(disable)の場合、グラフのデータを取得しますが、オートスケールは一切実施されません。
+  You can turn on/off auto-scaling at Auto Scale. When enabled, Auto Scale obtains chart data and performs auto-scaling when the heavy load conditions are met. When disabled, Auto Scale obtains chart data but does not perform auto-scaling at all.
 
-  使い始めはひとまず無効を指定し、収集されたグラフに基づき、適切な閾値を指定できた後で、有効に設定する事をお勧めします。
+  It is recommended to set Auto Scale to “Disabled” once when you first use it, and set it to “Enabled” after setting the appropriate threshold based on the chart data gathered.
 
 ### (b)Dyno Limit
- _Dyno limit_ではオートスケールにより変更されるDyno数の範囲を設定することができます。Dynoの最小値は、どれだけ負荷が少なくても、指定値よりもDynoが少なくなることはありません。Dynoの最大値は、どれだけ負荷が小さくても、指定値よりもDynoが大きくなる事はありません。
+  You can set the range of the number of Dynos that is modified by auto-scaling at Dyno Limit. The minimum number of Dynos cannot be less than the designated value, however little the load is. The maximum number of Dynos cannot be more than the designated value, however little the load is.
 
- 最小値は最低限の性能を確保するための数値を指定してください。また、最大値はコストに合わせて数値を指定してください。また、current dynoは今現在のDyno数を表しています。
+  Set the minimum number of Dynos to a numeric value that secures the minimum performance. Also, set the maximum number of Dynos to a numeric value according to costs. In addition, “Current Dyno” shows the current number of Dynos.
 
 ### (c)Response Time
- Bounscaleのスケールアウトは2つの指標値が両方高負荷状態になった場合に実行されます。
+  Bounscale’s scale-out is performed when the status of both of the two indicators has become “high load”.
 
- 指標値"ResponseTime"はBounscaleから該当のURLに実際にHTTPリクエストを発行したレスポンスタイムです。この指標値はアプリケーションの負荷を測定するために最重要な項目であるため、必ず利用する指標値となります。*Response Time*をクリックすると、レスポンスタイムを監視しているURLの設定を行うことができます。
+  The indicator “ResponseTime” is a response time in which an HTTP request was actually issued from Bounscale to the applicable URL.
 
- アプリケーションの中で平均的なレスポンスタイムを返却するURLを指定する事をお勧めします。
+  This indicator is the most important item to measure the load on the application and you will always use it. You can set the URL monitoring the response time by clicking “Response Time”.
 
-### (d)オプショナル指標値
- セレクトボックスで2つ目のオプショナル指標値を選択します。オプショナル指標値には以下のものがあります。
+  It is recommended to set a URL that returns the average application response time.
+
+### (d)Optional indicators
+ Select the second optional indicator from the drop-down box. Optional indicators are as follows:
 
  * Busyness[%]
+  Busyness [%] is an indicator that measures the duration during which Dynos are processing requests in a certain amount of time and the wait time and shows its ratio between 0% and 100%.
 
- 一定時間あたりのDynoが処理するリクエスト処理時間、待ち時間を計測し、その比率を0%から100%で表す指標値です。
-
- 例えば、10秒間に6秒間リクエスト処理を行い、4秒間リクエスト待ちのとき、出力は60[%]となります。
+  For instance, the output is 60[%] if a request is processed for 6 seconds and Dyno waits 4 seconds for a request in a period of 10 seconds.
 
  * CPU[ms]
-
- CPUの使用時間を表す指標値です。
+  CPU [ms] is an indicator that shows the duration of the use of the CPU.
 
  * Memory[MB]
 
- メモリの使用量を表す指標値です。
+  Memory [MB] is an indicator that shows the amount of memory in use.
 
  * Throughput[response/min]
 
- 1分間あたりに返すレスポンス数を表す指標値です。
+  Throughput [response/min] is an indicator that shows the number of responses returned per minute.
 
-### (e)(f)グラフ
- _グラフ_では、スケールアウトする閾値を選択することができます。固定の指標値であるResponseTimeの閾値は左のつまみで設定することができます。
-また、オプショナルの指標値であるCPUの閾値は右のつまみで設定することができます。2つの指標値の設定した閾値の両方が超えるとスケールアウトしてアプリケーションへの負荷を低減させます。
+### (e)(f)Charts
+  You can select thresholds to scale out at Charts. You can set the ResponseTime threshold, which is a fixed indicator, with the knob on the left. Also, you can set the CPU threshold, which is an optional indicator, with the knob on the right. If both of the thresholds set for the two indicators are exceeded, Bounscale will scale out to reduce the load on the application.
 
 ### (g)Interval
- _Interval_では、データを取得するスパンを設定することができます。短いほど急激にDynoの数が増減します。
+ You can set the interval at which data is obtained at Interval. The shorter the interval, the more suddenly the number of Dynos increases/decreases.
 
 ### (h)ScaleIn
- Bounscaleのスケールインはレスポンスタイム単体が一定の閾値を下回った場合に実行されます。_ScaleIn_で、スケールインするレスポンスタイムを設定することができます。この値はできるだけ小さく指定する事をお勧めします。アプリケーションへの負荷が十分に収まっていない状態でスケールインする事を防ぐためです。
+ Bounscale’s scale-in is performed when the response time alone becomes lower than a certain threshold. You can set the response time to scale in with _ScaleIn_. It is recommended to set this value as low as possible. This is to prevent Bounscale from scaling in when the load on the application is not fully settled.
 
-### (i)Saveボタン
- 設定完了後Saveボタンを押します。
+### (i)Save Button
+ Click the Save button after the setting is complete.
 
-## 運用開始後
+## Once Bounscale Is in Operation
 
-実際の運用を始めた後は _Dyno History_ 画面を参照し、定常的に下記のガイドラインを参考にしてオートスケールの設定を最適化していってください。
+Once Bounscale is in actual operation, refer to the Dyno History screen to optimize the auto-scale settings on a regular basis with reference to the following guidelines:
 
  ![sample04](https://s3.amazonaws.com/bounscale/sample07.png)
 
-* 十分なレスポンスタイムが維持されているか確認します。
-* レスポンスタイムが不十分な場合、そのタイミングでDynoの数が増加しているか確認します。
-  * 増加していない場合は閾値及びオプショナル指標値を適切に調整します。
-* Dynoが増えているにも関わらずレスポンスタイムが改善しない場合は、Bounscaleでは対応できません。
-  * アプリケーション以外（DBサーバなど）がボトルネックになっている可能性を調査します。
-* 負荷が高くない状況でオートスケールが実行されている場合も、閾値及びオプショナル指標値を適切に調整してください。
+* Check if enough response time is maintained.
+* If the response time is not enough, check if the number of Dynos has increased in conjunction with the insufficient response time.
+  * If the number of Dynos has not increased, adjust the thresholds and optional indicators appropriately.
+*  If the response time does not improve despite an increase in the number of Dynos, it cannot be dealt with by Bounscale.
+  * Investigate the possibility of something other than the application, such as a DB server, being the bottleneck.
+* If auto-scaling is performed where the load is not high, adjust the thresholds and optional indicators appropriately likewise.
 
-## サポート
+## Technical Support
 
- 不明点、動作不良などを発見された場合、issuesに登録をお願い致します。
- 
- それではあなたのアプリケーションがストレスから開放されることを。
+ If you are not certain about something or find a malfunction, etc., please register it at Issues.
+
+ We hope your application will be free from stress.
+
 
  DTS Corporation.
