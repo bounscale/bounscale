@@ -13,4 +13,10 @@ require "bounscale/writer/base"
 require "bounscale/writer/heroku_writer"
 
 require "bounscale/middlerware"
-require "bounscale/railtie" if defined?(Rails::Railtie)
+
+if defined?(Rails::Railtie)
+ require "bounscale/railtie"
+else
+ config = Rails.configuration
+ config.middleware.use Bounscale::Middleware
+end
