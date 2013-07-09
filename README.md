@@ -152,8 +152,8 @@ Once Bounscale is in actual operation, refer to the Dyno History screen to optim
 * If auto-scaling is performed where the load is not high, adjust the thresholds and optional indicators appropriately likewise.
 
 ## Technical Support
-
- If you are not certain about something or find a malfunction, etc., please register it at [Issues](https://github.com/bounscale/bounscale) on github.
+ Our site of github is [here](https://github.com/bounscale/bounscale).
+ If you are not certain about something or find a malfunction, etc., please register it at [Issues](https://github.com/bounscale/bounscale/issues) on github.
 
  We hope your application will be free from stress.
 
