@@ -1,6 +1,8 @@
 # Bounscale
 Bounscaleは、HerokuへデプロイされたRailsアプリケーションをオートスケールする環境を提供するアドオンです。
 
+https://addons.heroku.com/bounscale
+
 Bounscaleを追加することによって次のような利点を得ることができます。
 
 1. レスポンスの低下を抑えます。
