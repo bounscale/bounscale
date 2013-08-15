@@ -1,5 +1,5 @@
 # Bounscale
-Bounscale is an add-on that provides an environment to auto-scale the Rails application that is deployed to Heroku.
+Bounscale is an add-on that provides an environment to auto-scale the Rails/node.js application that is deployed to Heroku.
 
 https://addons.heroku.com/bounscale
 
