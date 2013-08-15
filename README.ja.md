@@ -16,15 +16,16 @@ __Application__
 
  * 動作確認済
    * Rails 2.3 or 3.0 or 3.2
+   * Ruby 1.9.2 or 1.9.3
  * 仕組み上はRackに対応していれば利用可能です
+ * [EXPERIMENTAL] node.js v0.10.15 / Express 3.3.5
 
 __Heroku Stack__
 
  * Ceder Stack
 
- Ruby 1.9.2 or 1.9.3
-
 ## はじめに
+### Ruby/Rails
 
  プロジェクトのGemfileに以下を追加します。
 
@@ -39,6 +40,33 @@ end
 
 ```config/environment.rb
 config.gem 'bounscale'
+```
+
+### [EXPERIMENTAL] node.js / Express
+ プロジェクトのpackage.jsonに以下を追加します。
+ 
+```package.json
+{
+...
+  "dependencies": {
+...
+    "bounscale": "*"
+  },
+...
+}
+```
+
+ プロジェクトのapp.jsに以下を追加します。
+ 「app.use」の一番頭の部分に追加してください。
+
+```app.js
+...
+app.set(.....);
+app.set(.....);
+app.use(require('bounscale')); // <-- insert here
+app.use(.....);
+app.use(.....);
+...
 ```
 
 ## アドオンのインストール
