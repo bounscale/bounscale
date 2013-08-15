@@ -1,5 +1,5 @@
 # Bounscale
-Bounscaleは、HerokuへデプロイされたRailsアプリケーションをオートスケールする環境を提供するアドオンです。
+Bounscaleは、HerokuへデプロイされたRails/node.jsアプリケーションをオートスケールする環境を提供するアドオンです。
 
 https://addons.heroku.com/bounscale
 
