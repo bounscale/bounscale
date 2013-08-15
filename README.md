@@ -1,5 +1,5 @@
 # Bounscale
-Bounscale is an add-on that provides an environment to auto-scale the application Rails that is deployed to Heroku.
+Bounscale is an add-on that provides an environment to auto-scale the Rails application that is deployed to Heroku.
 
 https://addons.heroku.com/bounscale
 
@@ -16,16 +16,16 @@ __Application__
 
  * Compatibility confirmed.
    * Rails 2.3 or 3.0 or 3.2
+   * Ruby 1.9.2 or 1.9.3
  * Supposed to be supported if compatible with the rack, according to the configurations.
+ * [EXPERIMENTAL] node.js v0.10.15 / Express 3.3.5
 
 __Heroku Stack__
 
  * Ceder Stack
 
- Ruby 1.9.2 or 1.9.3
-
 ## Getting Started
-
+### Ruby/Rails
  Add the following to your project’s Gemfile:
 
 ```Gemfile
@@ -38,6 +38,33 @@ gem 'bounscale'
 config.after_initialize do
   require 'bounscale'
 end
+```
+
+### [EXPERIMENTAL] node.js / Express
+ Add the following to you project's package.json
+ 
+```package.json
+{
+...
+  "dependencies": {
+...
+    "bounscale": "*"
+  },
+...
+}
+```
+
+ And add the following to you project's app.js.
+ You have to insert a line on the top of "app.use" paragraph.
+ 
+```app.js
+...
+app.set(.....);
+app.set(.....);
+app.use(require('bounscale')); // <-- insert here
+app.use(.....);
+app.use(.....);
+...
 ```
 
 ## Installation of the Add-on
