@@ -1,5 +1,5 @@
 # Bounscale
-Bounscale is an add-on that provides an environment to auto-scale the Rails/node.js application that is deployed to Heroku.
+Bounscale is an add-on that provides an environment to auto-scale the Rails/node.js/Play Framework2(Scala) application that is deployed to Heroku.
 
 https://addons.heroku.com/bounscale
 
@@ -19,6 +19,7 @@ __Application__
    * Ruby 1.9.2 or 1.9.3
  * Supposed to be supported if compatible with the rack, according to the configurations.
  * [EXPERIMENTAL] node.js v0.10.15 / Express 3.3.5
+ * [EXPERIMENTAL] Play Framework 2.1.3 / Scala 2.10
 
 __Heroku Stack__
 
@@ -65,6 +66,33 @@ app.use(require('bounscale')); // <-- insert here
 app.use(.....);
 app.use(.....);
 ...
+```
+
+### [EXPERIMENTAL] Play Framework2 / Scala
+ Add the following to you project's project/Build.scala
+ 
+```project/Build.scala
+...
+object ApplicationBuild extends Build {
+...
+  val appDependencies = Seq(
+    "bounscale" % "bounscale_2.10" % "0.0.1" // <--here
+  )
+
+  val main = play.Project(appName, appVersion, appDependencies).settings(
+    resolvers += "Bounscale Maven Repository on Github" at "http://bounscale.github.io/maven/" // <--here
+  )
+}
+```
+
+ And create a file named "Global.scala" in your app dir like following.
+```Global.scala
+import play.api.GlobalSettings
+import play.api.mvc.WithFilters
+import com.bounscale.BounscaleFilter
+
+object Global extends WithFilters(
+    new BounscaleFilter) with GlobalSettings
 ```
 
 ## Installation of the Add-on
