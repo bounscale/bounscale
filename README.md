@@ -212,7 +212,12 @@ Once Bounscale is in actual operation, refer to the Dyno History screen to optim
  Our site of github is [here](https://github.com/bounscale/bounscale).
  If you are not certain about something or find a malfunction, etc., please register it at [Issues](https://github.com/bounscale/bounscale/issues) on github.
 
- We hope your application will be free from stress.
+## Other reference docs
+
+* http://www.resm.jp/relatedservice/bounscale.html (Japanese only)
 
 
- DTS Corporation.
+We hope your application will be free from stress.
+
+
+DTS Corporation.
