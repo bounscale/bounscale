@@ -16,7 +16,7 @@ require "bounscale/middlerware"
 
 if defined?(Rails::Railtie)
  require "bounscale/railtie"
-else
+elsif defined?(Rails)
  config = Rails.configuration
  config.middleware.use Bounscale::Middleware
 end
